@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = ["crates/viper"]
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+authors = ["WyattAu"]
+
+[profile.release]
+lto = true
+codegen-units = 1
