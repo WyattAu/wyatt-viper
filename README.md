@@ -16,8 +16,16 @@ cargo run -p viper        # PORT=8000 default
 cargo test -p viper
 ```
 
-Deploy anywhere Rust runs (fly.io / render free tier), then register the URL at
-play.battlesnake.com and join the arena — 24/7 ladder.
+Deploy (fly.io free tier):
+
+    fly launch --no-deploy --copy-config    # name the app wyatt-viper
+    fly deploy
+    fly status                              # the https://wyatt-viper.fly.dev URL
+
+Then register the URL at play.battlesnake.com and join the arena — 24/7
+ladder. The config keeps one always-on machine (a cold start would blow
+the ~500 ms per-move timeout). Docker: `docker build -t wyatt-viper .`
+works anywhere else Rust containers run.
 
 ## Logic ladder
 

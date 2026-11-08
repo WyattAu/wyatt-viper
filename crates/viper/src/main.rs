@@ -2,7 +2,7 @@
 //! (`lib.rs` + `core` module) so it stays unit-testable; this binary only
 //! binds axum routes and adapts HTTP to `engine::choose`.
 //!
-//! Run: `PORT=8000 cargo run -p snake`
+//! Run: `PORT=8000 cargo run -p viper`
 
 use axum::{Json, Router, routing::post};
 use std::{

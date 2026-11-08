@@ -1,0 +1,33 @@
+# fly.io free-tier deployment.
+#   fly launch --no-deploy --copy-config   # first time (name the app wyatt-viper)
+#   fly deploy
+#   fly status                             # get the *.fly.dev URL
+# then register the URL at play.battlesnake.com and join the arena.
+#
+# Always-on (min_machines_running = 1, no auto-stop): arena moves allow
+# ~500 ms each; a free-tier cold start (~300-500 ms) would blow the first
+# move of every game. One shared-cpu-1x / 256 MB machine fits the free
+# allowance — the server is a single static axum binary.
+
+app = "wyatt-viper"
+primary_region = "sea"
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
